@@ -18,7 +18,7 @@ public class Cardapio {
     private boolean avaliable;
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     @Column(name = "Registration_Date")

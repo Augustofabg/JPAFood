@@ -10,7 +10,7 @@
         <class>br.com.jpaFood.entity.Cliente</class>
         <class>br.com.jpaFood.entity.Ordem</class>
         <class>br.com.jpaFood.entity.OrdensCardapio</class>
-
+        <class>br.com.jpaFood.entity.Endereco</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:jpaFood" />

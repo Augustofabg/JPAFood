@@ -2,6 +2,9 @@ package br.com.jpaFood.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -10,15 +13,21 @@ public class Cliente {
     private String cpf;
 
     private String name;
-    private String cep;
+
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<Endereco> endereco = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(String cpf, String name, String cep) {
+    public Cliente(String cpf, String name) {
         this.cpf = cpf;
         this.name = name;
-        this.cep = cep;
+    }
+
+    public void addEndereco(Endereco endereco){
+        endereco.setCliente(this);
+        this.endereco.add(endereco);
     }
 
     public String getCpf() {
@@ -37,22 +46,13 @@ public class Cliente {
         this.name = name;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-
     @Override
     public String
     toString() {
-        return "Cliente: [ " +
+        return ", Cliente: [ " +
                 "cpf: " + cpf +
                 ", name: " + name +
-                ", cep: " + cep +
-                " ]";
+                ", Endereço: " + endereco +
+                " ] ";
     }
 }

@@ -1,25 +1,29 @@
 package br.com.jpaFood.service.test;
 
-import br.com.jpaFood.dao.CardapioDao;
-import br.com.jpaFood.dao.ClienteDao;
+import br.com.jpaFood.dao.OrdemDao;
+import br.com.jpaFood.entity.Ordem;
 import br.com.jpaFood.util.CargaDeDadosUtil;
 import br.com.jpaFood.util.JPAutil;
 import jakarta.persistence.EntityManager;
 
-import java.math.BigDecimal;
-
-
-public class CardapioService {
+public class OrdemService {
     public static void main(String[] args) {
         EntityManager entityManager = JPAutil.getEntityManagerJPAFOOD();
         entityManager.getTransaction().begin();
         CargaDeDadosUtil.CadastrarCategoria(entityManager);
         CargaDeDadosUtil.CadastrarCardapio(entityManager);
+        CargaDeDadosUtil.CadastrarEndereco(entityManager);
         CargaDeDadosUtil.CadastrarClientes(entityManager);
-        CardapioDao CardapioDao = new CardapioDao(entityManager);
-        ClienteDao clienteDao = new ClienteDao(entityManager);
-        System.out.println("Lista de Valores: " + CardapioDao.consultarValor(BigDecimal.valueOf(80.70)));
-        System.out.println("Lista CPF: " + clienteDao.consultarCpf("654987321"));
+        CargaDeDadosUtil.CadastrarOrdens(entityManager);
+
+        OrdemDao ordemDao = new OrdemDao(entityManager);
+
+        Ordem ordem = ordemDao.joinFetchClient(2);
+
+        entityManager.getTransaction().commit();
         entityManager.close();
+
+        System.out.println(ordem.getCliente().getName());
+
     }
 }

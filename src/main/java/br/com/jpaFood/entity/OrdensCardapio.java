@@ -13,10 +13,10 @@ public class OrdensCardapio {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Ordem ordem;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cardapio cardapio;
 
     private BigDecimal price;
@@ -56,9 +56,7 @@ public class OrdensCardapio {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+    public void setAmount(Integer amount) { this.amount = amount; }
 
     public Integer getId() {
         return id;
@@ -68,7 +66,6 @@ public class OrdensCardapio {
     public String toString() {
         return   " [ " +
                   "id:" + id +
-                ", ordem: " + ordem +
                 ", cardapio: " + cardapio +
                 ", price: " + price +
                 ", amount: " + amount +

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,16 +16,16 @@ public class Ordem {
     private Integer Id;
 
     @Column (name = "total_price")
-    private BigDecimal totalPrice;
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     @Column (name = "creation_date")
     private final LocalDateTime creationDate = LocalDateTime.now();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "ordem")
-    private List<OrdensCardapio> ordensCardapioList;
+    @OneToMany(mappedBy = "ordem",cascade = CascadeType.ALL)
+    private List<OrdensCardapio> ordensCardapioList = new ArrayList<>();
 
     public Ordem(){
     }
@@ -32,7 +33,10 @@ public class Ordem {
     public void addOrdensCardapio(OrdensCardapio ordensCardapio){
         ordensCardapio.setOrdem(this);
         this.ordensCardapioList.add(ordensCardapio);
+        this.totalPrice = totalPrice.add(ordensCardapio.getPrice().multiply(new BigDecimal(ordensCardapio.getAmount())));
+
     }
+
 
     public Ordem(Cliente cliente) {
         this.cliente = cliente;
@@ -50,24 +54,32 @@ public class Ordem {
         return creationDate;
     }
 
+
     public BigDecimal getTotalPrice() {
         return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public Integer getId() {
         return Id;
     }
 
+    public List<OrdensCardapio> getOrdensCardapioList() {
+        return ordensCardapioList;
+    }
+
+    public void setOrdensCardapioList(List<OrdensCardapio> ordensCardapioList) {
+        this.ordensCardapioList = ordensCardapioList;
+
+    }
+
     @Override
     public String toString() {
-        return  "  Ordem: [ " +
-                "Id:" + Id +
-                ", totalPrice:" + totalPrice +
-                ", creationDate:" + creationDate +
-                ", cliente:" + cliente + " ]";
+        return "Ordem{" +
+                "Id=" + Id +
+                ", totalPrice=" + totalPrice +
+                ", creationDate=" + creationDate +
+                ", cliente=" + cliente +
+                ", ordensCardapioList=" + ordensCardapioList +
+                '}';
     }
 }
