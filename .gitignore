@@ -36,3 +36,43 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Ignorar pasta de build do Maven
+/target/
+
+# Ignorar arquivos de configuração do IntelliJ IDEA
+/.idea/
+/*.iml
+
+# Ignorar arquivos de sistema
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.class
+*.swp
+*.swo
+*.tmp
+
+# Cache do Maven
+.mvn/
+dependency-reduced-pom.xml
+buildNumber.properties
+release.properties
+
+# Arquivos de sistema operacionais
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Configurações locais de execução do IntelliJ
+/out/
+
+# Arquivos de crash do Java
+hs_err_pid*
+replay_pid*
+
+# Test reports (se não quiser subir)
+surefire-reports/

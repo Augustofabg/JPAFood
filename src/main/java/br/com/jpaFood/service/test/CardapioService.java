@@ -18,8 +18,6 @@ public class CardapioService {
         CargaDeDadosUtil.CadastrarClientes(entityManager);
         CardapioDao CardapioDao = new CardapioDao(entityManager);
         ClienteDao clienteDao = new ClienteDao(entityManager);
-        System.out.println("Lista de Valores: " + CardapioDao.consultarValor(BigDecimal.valueOf(80.70)));
-        System.out.println("Lista CPF: " + clienteDao.consultarCpf("654987321"));
         entityManager.close();
     }
 }

@@ -13,7 +13,7 @@ public class Ordem {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @Column (name = "total_price")
     private BigDecimal totalPrice = BigDecimal.ZERO;
@@ -60,7 +60,7 @@ public class Ordem {
     }
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public List<OrdensCardapio> getOrdensCardapioList() {
@@ -75,7 +75,7 @@ public class Ordem {
     @Override
     public String toString() {
         return "Ordem{" +
-                "Id=" + Id +
+                "Id=" + id +
                 ", totalPrice=" + totalPrice +
                 ", creationDate=" + creationDate +
                 ", cliente=" + cliente +

@@ -9,10 +9,13 @@ import java.util.List;
 @Table(name = "clientes")
 public class Cliente {
 
-    @Id
-    private String cpf;
+    @EmbeddedId
+    private ClienteId clienteId;
 
     private String name;
+
+    @Embedded
+    private Contato contato;
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<Endereco> endereco = new ArrayList<>();
@@ -20,22 +23,14 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String cpf, String name) {
-        this.cpf = cpf;
+    public Cliente(String cpf, String email, String name) {
+        this.clienteId = new ClienteId(email, cpf);
         this.name = name;
     }
 
     public void addEndereco(Endereco endereco){
         endereco.setCliente(this);
         this.endereco.add(endereco);
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getName() {
@@ -46,13 +41,40 @@ public class Cliente {
         this.name = name;
     }
 
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
+    public String getCpf(){
+        return clienteId.getCpf();
+    }
+
+
+    public String getEmail(){
+        return clienteId.getEmail();
+    }
+
+    public void setCpf(String cpf){
+       this.clienteId.setCpf(cpf);
+    }
+
+    public void setEmail(String email){
+        this.clienteId.setEmail(email);
+    }
+
     @Override
     public String
     toString() {
         return ", Cliente: [ " +
-                "cpf: " + cpf +
+                " cpf: " + clienteId.getCpf() +
+                ", email " + clienteId.getEmail() +
                 ", name: " + name +
-                ", Endereço: " + endereco +
+                ", endereço: " + endereco +
+                ", contato: "  + contato +
                 " ] ";
     }
 }

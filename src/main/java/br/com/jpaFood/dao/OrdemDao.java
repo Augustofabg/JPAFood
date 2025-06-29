@@ -1,7 +1,5 @@
 package br.com.jpaFood.dao;
 
-import br.com.jpaFood.entity.Cliente;
-import br.com.jpaFood.entity.Endereco;
 import br.com.jpaFood.entity.Ordem;
 import br.com.jpaFood.vo.ItensPrincipaisVo;
 import jakarta.persistence.EntityManager;
@@ -44,7 +42,7 @@ public class OrdemDao {
 
 
     public Ordem joinFetchClient(final Integer id){
-            String SQL = "SELECT o FROM Ordem o JOIN FETCH  o.cliente WHERE o.id = :id";
+            String SQL = "SELECT o FROM Ordem o JOIN FETCH o.cliente WHERE o.id = :id";
             return this.entityManager.createQuery(SQL,Ordem.class).setParameter("id", id).getSingleResult();
     }
 

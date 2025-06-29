@@ -2,6 +2,7 @@ package br.com.jpaFood.util;
 
 import br.com.jpaFood.dao.*;
 import br.com.jpaFood.entity.*;
+import br.com.jpaFood.vo.ClienteVo;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
@@ -113,16 +114,28 @@ public class CargaDeDadosUtil {
         ClienteDao clienteDao = new ClienteDao(entityManager);
         EnderecoDao enderecoDao = new EnderecoDao(entityManager);
 
-        Cliente cliente1 = new Cliente("123456789", "Mariana Silva");
-        Cliente cliente2 = new Cliente("987654321", "Carlos Oliveira");
-        Cliente cliente3 = new Cliente("456789123", "Fernanda Costa");
-        Cliente cliente4 = new Cliente("789123456", "Lucas Pereira");
-        Cliente cliente5 = new Cliente("321654987", "Juliana Souza");
-        Cliente cliente6 = new Cliente("654987321", "Marcelo Dias");
-        Cliente cliente7 = new Cliente("159753486", "Patrícia Rocha");
-        Cliente cliente8 = new Cliente("753159842", "André Lima");
-        Cliente cliente9 = new Cliente("852963741", "Beatriz Mendes");
-        Cliente cliente10 = new Cliente("741852963", "Renato Martins");
+        Cliente cliente1 = new Cliente("123456789", "mariana@gmail.com", "Mariana Silva");
+        Cliente cliente2 = new Cliente("987654321", "carlos@gmail.com", "Carlos Oliveira");
+        Cliente cliente3 = new Cliente("456789123", "fernanda@gmail.com", "Fernanda Costa");
+        Cliente cliente4 = new Cliente("789123456", "lucas@gmail.com","Lucas Pereira");
+        Cliente cliente5 = new Cliente("321654987", "juliana@gmail.com","Juliana Souza");
+        Cliente cliente6 = new Cliente("654987321", "marcelo@gmail.com", "Marcelo Dias");
+        Cliente cliente7 = new Cliente("159753486", "fernanda2@gmail.com", "Fernanda Rocha");
+        Cliente cliente8 = new Cliente("753159842", "andre@gmail.com", "André Lima");
+        Cliente cliente9 = new Cliente("852963741", "fernanda2@gmail.com", "Fernanda Mendes");
+        Cliente cliente10 = new Cliente("741852963", "renato@gmail.com", "Renato Martins");
+
+        cliente1.setContato(new Contato("11", "98765-1001"));
+        cliente2.setContato(new Contato("11", "98765-1002"));
+        cliente3.setContato(new Contato("11", "98765-1003"));
+        cliente4.setContato(new Contato("11", "98765-1004"));
+        cliente5.setContato(new Contato("11", "98765-1005"));
+        cliente6.setContato(new Contato("11", "98765-1006"));
+        cliente7.setContato(new Contato("19", "98765-1007"));
+        cliente8.setContato(new Contato("11", "98765-1008"));
+        cliente9.setContato(new Contato("11", "98765-1009"));
+        cliente10.setContato(new Contato("11", "98765-1010"));
+
         cliente1.addEndereco(enderecoDao.consultarId(1));
         cliente2.addEndereco(enderecoDao.consultarId(2));
         cliente3.addEndereco(enderecoDao.consultarId(3));
@@ -153,16 +166,18 @@ public class CargaDeDadosUtil {
         ClienteDao clienteDao = new ClienteDao(entityManager);
         CardapioDao cardapioDao = new CardapioDao(entityManager);
 
-        Ordem ordem1 = new Ordem(clienteDao.consultarCpf("123456789"));
-        Ordem ordem2 = new Ordem(clienteDao.consultarCpf("987654321"));
-        Ordem ordem3 = new Ordem(clienteDao.consultarCpf("456789123"));
-        Ordem ordem4 = new Ordem(clienteDao.consultarCpf("789123456"));
-        Ordem ordem5 = new Ordem(clienteDao.consultarCpf("321654987"));
-        Ordem ordem6 = new Ordem(clienteDao.consultarCpf("654987321"));
-        Ordem ordem7 = new Ordem(clienteDao.consultarCpf("159753486"));
-        Ordem ordem8 = new Ordem(clienteDao.consultarCpf("753159842"));
-        Ordem ordem9 = new Ordem(clienteDao.consultarCpf("852963741"));
-        Ordem ordem10 = new Ordem(clienteDao.consultarCpf("741852963"));
+
+        Ordem ordem1 = new Ordem(clienteDao.consultarId(null, "123456789"));
+        Ordem ordem2 = new Ordem(clienteDao.consultarId(null, "987654321"));
+        Ordem ordem3 = new Ordem(clienteDao.consultarId(null, "456789123"));
+        Ordem ordem4 = new Ordem(clienteDao.consultarId(null,"789123456"));
+        Ordem ordem5 = new Ordem(clienteDao.consultarId(null, "321654987"));
+        Ordem ordem6 = new Ordem(clienteDao.consultarId(null, "654987321"));
+        Ordem ordem7 = new Ordem(clienteDao.consultarId(null, "159753486"));
+        Ordem ordem8 = new Ordem(clienteDao.consultarId(null, "753159842"));
+        Ordem ordem9 = new Ordem(clienteDao.consultarId(null, "852963741"));
+        Ordem ordem10 = new Ordem(clienteDao.consultarId(null,"741852963"));
+
 
         ordem1.addOrdensCardapio(new OrdensCardapio(ordem1, cardapioDao.consultarporID(3), 1));
         ordem2.addOrdensCardapio(new OrdensCardapio(ordem2, cardapioDao.consultarporID(7), 3));
